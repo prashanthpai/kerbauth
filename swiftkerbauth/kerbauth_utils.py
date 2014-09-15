@@ -19,7 +19,8 @@ import grp
 import signal
 from subprocess import Popen, PIPE
 from time import time
-from swiftkerbauth import TOKEN_LIFE, RESELLER_PREFIX
+from gluster.swift.common.middleware.swiftkerbauth \
+    import TOKEN_LIFE, RESELLER_PREFIX
 
 
 def get_remote_user(env):
@@ -62,11 +63,11 @@ def set_auth_data(mc, username, token, expires, groups):
     """
     auth_data = (expires, groups)
     memcache_token_key = "%s/token/%s" % (RESELLER_PREFIX, token)
-    mc.set(memcache_token_key, auth_data, timeout=TOKEN_LIFE)
+    mc.set(memcache_token_key, auth_data, time=TOKEN_LIFE)
 
     # Record the token with the user info for future use.
     memcache_user_key = '%s/user/%s' % (RESELLER_PREFIX, username)
-    mc.set(memcache_user_key, token, timeout=TOKEN_LIFE)
+    mc.set(memcache_user_key, token, time=TOKEN_LIFE)
 
 
 def generate_token():

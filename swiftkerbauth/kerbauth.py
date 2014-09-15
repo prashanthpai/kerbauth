@@ -25,8 +25,8 @@ from swift.common.swob import HTTPBadRequest, HTTPForbidden, HTTPNotFound, \
 from swift.common.middleware.acl import clean_acl, parse_acl, referrer_allowed
 from swift.common.utils import cache_from_env, get_logger,  \
     split_path, config_true_value
-
-from swiftkerbauth.kerbauth_utils import get_auth_data, generate_token, \
+from gluster.swift.common.middleware.swiftkerbauth.kerbauth_utils import \
+    get_auth_data, generate_token, \
     set_auth_data, run_kinit, get_groups_from_username
 
 
